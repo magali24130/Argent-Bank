@@ -10,6 +10,8 @@ import Login from "../src/Pages/Login/login";
 import Profile from "../src/Pages/Profile/profile";
 import Error from "../src/Pages/Error/error";
 
+import "../src/css/main.css";
+
 export default function App() {
   const isConnected = useSelector((state) => state.auth.isConnected);
 
