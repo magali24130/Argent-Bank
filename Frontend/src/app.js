@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Footer from "../src/Components/Footer/footer";
-import Header from "../src/Components/Header/header";
+import Header from "../../utils/Components/Header/header.js";
 
 import Home from "../src/Pages/Home/home";
 import Login from "../src/Pages/Login/login";
