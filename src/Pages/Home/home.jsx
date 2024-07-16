@@ -7,8 +7,7 @@ import iconMoney from '../../img/icon-money.png';
 import iconSecurity from '../../img/icon-security.png';
 import './home.scss';
 
-/* Home page */
-function Home () {
+export default function Home () {
     const imageData = {
         "icon-chat.webp": iconChat,
         "icon-money.webp": iconMoney,
@@ -18,13 +17,13 @@ function Home () {
     return (
         <div className='homepage'>
             <main>
-                {/* Returns banner*/}
+               
                 <Banner />
                 <section className="features">
                     <h2 className='sr-only'>Features</h2>
-                    {/* Return items from json file with map */}
+                    
                     {FeaturesItemData.map((data) => (
-                        /* Return item component */
+                       
                         < Item 
                             key={data.id}
                             image={imageData[data.image]}
@@ -39,4 +38,3 @@ function Home () {
     )
 }
 
-export default Home

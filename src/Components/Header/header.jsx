@@ -5,7 +5,7 @@ import Logo from '../../img/argentBankLogo.png';
 import { logout } from '../../Redux/auth.actions';
 import './header.scss';
 
-function Header () {
+export default function Header () {
     /* Updates user data on header component from state redux */
     const isConnected = useSelector((state) => state.auth.token);
     const firstname = useSelector((state) => state.user.userData.firstname);
@@ -50,4 +50,3 @@ function Header () {
     ) 
 }
 
-export default Header

@@ -1,7 +1,7 @@
 import React from "react";
 import './footer.scss';
 
-function Footer () {
+export default function Footer () {
     return (
         <footer>
             <p>Copyright 2020 Argent Bank</p>
@@ -9,4 +9,4 @@ function Footer () {
     )
 }
 
-export default Footer
+
