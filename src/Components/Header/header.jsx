@@ -1,18 +1,18 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import Logo from '../assets/argentBankLogo.png'
+import argentBankLogo from '../../img/argentBankLogo.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAuthConnected, logout } from '../features/auth/authSlice'
-import { emptyUserData, getUserData } from '../features/user/userSlice'
+// import { getAuthConnected, logout } from '../features/auth/authSlice'
+// import { emptyUserData, getUserData } from '../features/user/userSlice'
 
 export default function Header() {
     const dispatch = useDispatch()
-    const firstName = useSelector(getUserData).firstName
-    const connected = useSelector(getAuthConnected)
+    // const firstName = useSelector(getUserData).firstName
+    // const connected = useSelector(getAuthConnected)
 
     const handleLogOut = () => {
-        dispatch(logout())
-        dispatch(emptyUserData())
+        // dispatch(logout())
+        // dispatch(emptyUserData())
     }
 
     return (
@@ -20,23 +20,23 @@ export default function Header() {
             <Link className="main-nav-logo" to="/">
                 <img
                     className="main-nav-logo-image"
-                    src={Logo}
+                    src={argentBankLogo}
                     alt="Argent Bank Logo"
                 />
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
             <div>
-                {!connected && (
+                {/* {!connected && ( */}
                     <NavLink className="main-nav-item" to="/login">
                         <i className="fa fa-user-circle" aria-hidden="true"></i>
                         Sign In
                     </NavLink>
                 )}
-                {connected && (
+                {/* {connected && ( */}
                     <>
                         <NavLink className="main-nav-item" to="/profile">
                             <i className="fa fa-user-circle"></i>
-                            {firstName}
+                            {/* {firstName} */}
                         </NavLink>
                         <NavLink
                             className="main-nav-item"
