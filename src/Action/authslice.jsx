@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+
 
 const initialState = {
     credentials: '',
@@ -15,13 +15,23 @@ export const getUserToken = createAsyncThunk(
     'auth/getUserToken',
     async (credentials, { rejectWithValue }) => {
         try {
-            const response = await axios.post(BASE_URL, credentials)
-            return response.data
+            const response = await fetch(BASE_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(credentials),
+            });
+            if (!response.ok){
+                throw new Error(response.statusText);
+            }
+            const data = await response.json();
+            return data;
         } catch (error) {
-            return rejectWithValue(error.code)
+            return rejectWithValue(error.message);
         }
     }
-)
+);
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -69,7 +79,7 @@ export const getAuthError = (state) => state.auth.error
 export const getAuthToken = (state) => state.auth.token
 
 //actions
-export const { changeUserCredentials, login, logout } = authSlice.actions
+export const { changeUserCredentials, logout } = authSlice.actions
 
 //reducers
 export const authReducer = authSlice.reducer

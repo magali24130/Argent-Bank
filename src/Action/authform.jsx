@@ -6,8 +6,8 @@ import {
     getAuthError,
     getAuthStatus,
     getUserToken,
-} from './authSlice'
-import Loader from '../../utils/Loader/Loader'
+} from './authslice'
+import Loader from '../Action/loader'
 
 function AuthForm() {
     const dispatch = useDispatch()

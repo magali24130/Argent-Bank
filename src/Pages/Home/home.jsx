@@ -1,17 +1,17 @@
 import React from 'react'
-// import Hero from '../features/Hero/Hero'
-// import { featuresData } from '../datas/features'
-// import Feature from '../features/Feature/Feature'
+import Hero from '../../Action/hero'
+import { featuresData } from '../../Data/data'
+import Feature from '../../Action/feature'
 
 const Home = () => {
     return (
         <main>
-            {/* <Hero /> */}
+            <Hero />
             <section className="features">
                 <h2 className="sr-only">Features</h2>
-                {/* {featuresData.map((feature, index) => { */}
+                {featuresData.map((feature, index) => {
                     return (
-                        {/* <Feature */}
+                        <Feature
                             key={index}
                             src={feature.src}
                             title={feature.title}
@@ -23,5 +23,6 @@ const Home = () => {
         </main>
     )
 }
+
 
 export default Home

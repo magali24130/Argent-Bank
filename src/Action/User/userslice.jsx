@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 
 const initialState = {
     email: '',
@@ -10,31 +9,47 @@ const initialState = {
     updatedAt: '',
 }
 
+const BASE_URL = 'http://localhost:3001/api/v1/user/profile'
+
 export const fetchUserData = createAsyncThunk(
     'user/getUserData',
-    async (token) => {
-        const res = await axios({
-            method: 'post',
-            url: 'http://localhost:3001/api/v1/user/profile',
-            headers: { Authorization: `Bearer ${token}` },
-        })
-        return res.data.body
+    async (token,{rejectWithValue}) => {
+        try{
+            const response = await fetch (BASE_URL, {
+                method: 'POST',
+                headers: {Authorization: 'Bearer $ {token}', 'Content-Type': 'application/json'},
+            });
+        if (!response.ok) {
+            throw new Error(response.statusText);
+            }
+            const data = await response.json();
+            return data.body;
+        } catch (error){
+            return rejectWithValue(error.message);
+        }
     }
-)
+);
+     
 
 export const updateUserData = createAsyncThunk(
     'user/updateUserData',
-    async (data) => {
-        const res = await axios({
+    async (data, {rejectWithValue}) => {
+        try{
+        const response = await fetch(BASE_URL,{
             method: 'put',
-            url: 'http://localhost:3001/api/v1/user/profile',
-            headers: { Authorization: `Bearer ${data.token}` },
-            data: data.userNames,
-        })
-
-        return res.data.body
+            headers: {Authorization: 'Bearer $ {token}', 'Content-Type': 'application/json'},
+            body: JSON.stringify(data.userNames),
+        });
+        if (!response.ok){
+            throw new Error(response.statusText);
+        }
+        const responseData = await response.json();    
+        return responseData.body;
+    } catch (error) {
+        return rejectWithValue(error.message);
     }
-)
+}
+);
 
 export const userSlice = createSlice({
     name: 'user',

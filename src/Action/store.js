@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { authSlice } from '../features/auth/authSlice'
-import { userSlice } from '../features/user/userSlice'
+import { authSlice } from '../Action/authslice'
+import { userSlice } from '../Action/User/userslice'
 
 const state = {}
 

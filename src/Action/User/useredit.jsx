@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getUserData, updateUserData } from './userSlice'
-import { getAuthToken } from '../auth/authSlice'
+import { getUserData, updateUserData } from '../../Action/User/userslice'
+import { getAuthToken } from '../../Action/authslice'
 
 function UserEditForm({ setEditToggle }) {
     const dispatch = useDispatch()

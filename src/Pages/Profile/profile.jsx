@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import { getAuthToken } from '../features/auth/authSlice'
-// import { fetchUserData, getUserData } from '../features/user/userSlice'
-// import UserEditForm from '../features/user/UserEditForm'
-// import Account from '../features/Account/Account'
+import { getAuthToken } from '../../Action/authslice'
+import { fetchUserData, getUserData } from '../../Action/User/userslice'
+import UserEditForm from '../../Action/User/useredit'
+import Account from '../../Action/account'
 
 export default function Profile() {
     const dispatch = useDispatch()
     const [editToggle, setEditToggle] = useState(false)
     const user = useSelector(getUserData)
-    // const token = useSelector(getAuthToken)
+    const token = useSelector(getAuthToken)
 
     useEffect(() => {
         dispatch(fetchUserData(token))
@@ -42,7 +42,7 @@ export default function Profile() {
                     </button>
                 )}
             </div>
-            {/* <Account /> */}
+            {<Account /> }
         </main>
     )
 }
