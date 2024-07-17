@@ -1,16 +1,16 @@
-import React from 'react';
-import Form from '../../components/Form.jsx';
-import './SignIn.scss';
+import React from 'react'
+import AuthForm from '../features/auth/AuthForm'
 
-
-export default function Login () {
+function Login() {
     return (
-        <div className='signin-page'>
-            <main className='bg-dark'>
-                {}
-                < Form />
-            </main>
-        </div>
-        
+        <main className="main bg-dark">
+            <section className="sign-in-content">
+                <i className="fa fa-user-circle sign-in-icon"></i>
+                <h1>Sign In</h1>
+                <AuthForm />
+            </section>
+        </main>
     )
 }
+
+export default Login
