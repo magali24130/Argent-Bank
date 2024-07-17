@@ -1,52 +1,58 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../img/argentBankLogo.png';
-import { logout } from '../../Redux/auth.actions';
-import './header.scss';
+import React from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import Logo from '../assets/argentBankLogo.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAuthConnected, logout } from '../features/auth/authSlice'
+import { emptyUserData, getUserData } from '../features/user/userSlice'
 
-export default function Header () {
-    /* Updates user data on header component from state redux */
-    const isConnected = useSelector((state) => state.auth.token);
-    const firstname = useSelector((state) => state.user.userData.firstname);
+export default function Header() {
+    const dispatch = useDispatch()
+    const firstName = useSelector(getUserData).firstName
+    const connected = useSelector(getAuthConnected)
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    
-    const logoutHandler = () => {
-        dispatch(logout());
-        sessionStorage.clear();
-        localStorage.clear();
-        navigate('/');
+    const handleLogOut = () => {
+        dispatch(logout())
+        dispatch(emptyUserData())
     }
+
     return (
-        <header>
-            <h1 className='sr-only'>Argent Bank</h1>
-            <nav>
-                <Link to="/">
-                    <img src={Logo} alt="Bank Logo" />
-                </Link> 
-                {isConnected ? (
-                    <div className='connected'>
-                        <Link to='/profile'>
-                            <i className='fa-solid fa-2x fa-circle-user' />
-                            <p>{firstname}</p>
-                        </Link>
-                        <Link to='/' onClick={logoutHandler}>
-                            <i className='fa-solid fa-arrow-right-from-bracket' />
-                            <p> Sign out </p>
-                        </Link>
-                    </div>
-                ) : (
-                    <div className='not-connected'>
-                        <Link to='/login' >
-                            <i className="fa-solid fa-circle-user"></i>
-                            <p>Sign In</p>
-                        </Link>
-                    </div>
+        <nav className="main-nav">
+            <Link className="main-nav-logo" to="/">
+                <img
+                    className="main-nav-logo-image"
+                    src={Logo}
+                    alt="Argent Bank Logo"
+                />
+                <h1 className="sr-only">Argent Bank</h1>
+            </Link>
+            <div>
+                {!connected && (
+                    <NavLink className="main-nav-item" to="/login">
+                        <i className="fa fa-user-circle" aria-hidden="true"></i>
+                        Sign In
+                    </NavLink>
                 )}
-            </nav>
-        </header>
-    ) 
+                {connected && (
+                    <>
+                        <NavLink className="main-nav-item" to="/profile">
+                            <i className="fa fa-user-circle"></i>
+                            {firstName}
+                        </NavLink>
+                        <NavLink
+                            className="main-nav-item"
+                            to="/"
+                            onClick={handleLogOut}
+                        >
+                            <i
+                                className="fa fa-sign-out"
+                                aria-hidden="true"
+                            ></i>
+                            Sign out
+                        </NavLink>
+                    </>
+                )}
+            </div>
+        </nav>
+    )
 }
 
